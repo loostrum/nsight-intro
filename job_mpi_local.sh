@@ -12,4 +12,4 @@ module load NVHPC/24.5-CUDA-12.1.1 OpenMPI/4.1.5-NVHPC-24.5-CUDA-12.1.1 Nsight-S
 
 cd /home/loostrum3/nsight
 mkdir -p reports
-nsys profile --trace cuda,openacc,mpi,osrt,ucx -f true -o report6_mpi_local mpirun -n 2 $PWD/bin/mpiwrapper.sh $PWD/6_mpi
+nsys profile --trace cuda,openacc,mpi,osrt,ucx -f true -o reports/report6_mpi_local mpirun -n 2 $PWD/bin/mpiwrapper.sh $PWD/6_mpi
