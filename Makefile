@@ -16,10 +16,12 @@ $(FILES_MPI): %: src/%.f90
 	mpif90 $(FFLAGS) $^ -o $@
 
 $(PROF): prof-%: %
-	nsys profile --trace cuda,openacc,osrt,nvtx -f true -o report$< ./$< 
+	@mkdir -p reports
+	nsys profile --trace cuda,openacc,osrt,nvtx -f true -o reports/report$< ./$<
 
 $(PROF_MPI): prof-%: %
-	nsys profile --trace cuda,openacc,mpi,ucx,osrt,nvtx -f true -o report$< mpirun --oversubscribe -n $(NPROC) mpiwrapper ./$< 
+	@mkdir -p reports
+	nsys profile --trace cuda,openacc,mpi,ucx,osrt,nvtx -f true -o reports/report$< mpirun --oversubscribe -n $(NPROC) bin/mpiwrapper.sh ./$<
 
 prof-all: $(PROF)
 
